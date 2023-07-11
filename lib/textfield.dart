@@ -36,6 +36,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  var emailText = TextEditingController();
+  var passtext = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextField(
-                    enabled: true,
-                       decoration: InputDecoration(
+                    keyboardType: TextInputType.text,
+                         controller: emailText,
+                         decoration: InputDecoration(
+                           hintText: 'Enter email',
                            focusedBorder: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(11),
                            borderSide: BorderSide(
@@ -72,20 +76,30 @@ class _MyHomePageState extends State<MyHomePage> {
                            disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(11),
                       borderSide: BorderSide(
-                          color: Colors.pinkAccent,
+                          color: Colors.green,
                           width: 4
                       )
                   ),
-                           suffixText: 'username exist',
-                           //suffixIcon: IconButton(
-                            // icon: Icon(Icons.),
-                          // )
+                           //suffixText: 'username exist',
+                           //prefixText: "username",
+                           suffixIcon: IconButton(
+                             icon: Icon(Icons.remove_red_eye,
+                               color: Colors.black,),
+                             onPressed: (){
+                             },
+                           ),
+                           prefixIcon: Icon(Icons.phone, color: Colors.orange,),
 
                   ),
                   ),
-                  Container(height: 11,),
+                  Container(height: 12,),
                   TextField(
-                      decoration: InputDecoration(
+                        keyboardType: TextInputType.number,
+                        controller: passtext,
+                        obscureText: true,
+                        obscuringCharacter: '*',
+                        decoration: InputDecoration(
+                        hintText: "Enter a password here...",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(11),
                             borderSide: BorderSide(
@@ -93,6 +107,16 @@ class _MyHomePageState extends State<MyHomePage> {
                             )
                         ),
                       )),
+                  ElevatedButton(onPressed:  (){
+
+                    String uemail = emailText.text.toString();
+                    String upass =  passtext.text.toString();
+
+                    print("Email: $uemail, password: $upass");
+
+                  }, child: Text(
+                    'Login'
+                  ))
                 ],
               ),
         ))
